@@ -20,6 +20,16 @@
 #include <gtk/gtk.h>
 #include <curl/curl.h>
 #include "update_status.h"
+#include "gsd.h"
+#include "parser/parser.h"
+
+void write_data(char *buffer)
+{
+	printf("%s", buffer);
+	if ((GSDParser("error", buffer)) == 0) {
+	  window_message("Mensaje Publicado Correctamente");
+	}
+}
 
 void update_status(GtkEntry *entry1, char data[5][32])
 {
@@ -27,8 +37,7 @@ void update_status(GtkEntry *entry1, char data[5][32])
 	char *user = data[1];
 	char *server = data[2];
 	char *password = data[3];
-	const gchar *gchar_msg = gtk_entry_get_text(entry1);
-	char *msg = gchar_msg;
+	const char *msg = gtk_entry_get_text(entry1);
 	char url[100];
 	strcpy(url, protocol);
 	strcat(url, "://");
@@ -36,6 +45,7 @@ void update_status(GtkEntry *entry1, char data[5][32])
 	strcat(url, "/api/statuses/update.xml");
 
 	CURL *curl = curl_easy_init();
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
 	curl_easy_setopt(curl, CURLOPT_URL, url);
 
 	curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -47,5 +57,6 @@ void update_status(GtkEntry *entry1, char data[5][32])
 
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, buffer);
 	curl_easy_perform(curl);
+
 	curl_easy_cleanup(curl);
 }

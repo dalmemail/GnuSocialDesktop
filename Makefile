@@ -1,6 +1,6 @@
 CC = gcc
 OBJ_NAME = gsd
-OBJS = Main.c update_status.c
+OBJS = Main.c update_status.c gsd.c parser/parser.c
 FLAGS = -lcurl -std=c99
 
 all:
