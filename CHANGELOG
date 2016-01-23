@@ -4,6 +4,14 @@ v0.1 "Frodo" (17-01-2016)
 [+] Ventana Sobre GSD/About GSD Window
 [+] Publicar Nuevo Estado/Send New Post
 
+v0.2 "Gimli" (23-01-2016)
+-------------------------
+[+] Primitivo Soporte Multiidioma/Simple Multilanguaje Support
+[+] Sencillo Parser para XML/Simple GSD Parser to XML
+[+] Botón para enviar quits/New button to send quits
+[+] Sistema de notificación de errores/New error system
+[-] Posibilidad de enviar quits pulsando "enter"/Send quits using "enter"
+
 -------------------------
 [+] Añadido/Added
 [-] Eliminado/Removed
