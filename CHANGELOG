@@ -12,6 +12,13 @@ v0.2 "Gimli" (23-01-2016)
 [+] Sistema de notificación de errores/New error system
 [-] Posibilidad de enviar quits pulsando "enter"/Send quits using "enter"
 
+v0.3 "Arathorn" (??-??-2016)
+----------------------------
+[+] Posibilidad de configurar una cuenta de forma indefinida, sin necesidad
+de rellenar los datos de conexión cada vez que se ejecuta el programa a
+excepción de la contraseña.
+[+] Posibilidad de eliminar el archivo de configuración desde el cliente.
+
 -------------------------
 [+] Añadido/Added
 [-] Eliminado/Removed
