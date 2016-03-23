@@ -18,6 +18,10 @@ v0.3 "Arathorn" (??-??-2016)
 de rellenar los datos de conexión cada vez que se ejecuta el programa a
 excepción de la contraseña.
 [+] Posibilidad de eliminar el archivo de configuración desde el cliente.
+[+] Capacidad de responder a estados (in_reply_to=id)
+[+] Capacidad para leer menciones (notificaciones)
+[+] Capacidad para leer estados de la línea del usuario (home timeline)
+[+] Capacidad para leer estados de la línea temporal pública (public timeline)
 
 -------------------------
 [+] Añadido/Added
