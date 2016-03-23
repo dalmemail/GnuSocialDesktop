@@ -22,6 +22,11 @@
 #include "update_status.h"
 #include "lang/spanish.h"
 #include "gsd.h"
+#include "status.h"
+
+#define REPLY 0
+#define HOME_TIMELINE 1
+#define PUBLIC_TIMELINE 2
 
 gint delete_event( GtkWidget *widget,
                    GdkEvent  *event,
@@ -66,6 +71,21 @@ void send_quit()
 	gtk_container_add(GTK_CONTAINER(window),table);
         gtk_widget_show_all(window);
         gtk_main();
+}
+
+void replies()
+{
+	load_status(data, "1", REPLY);
+}
+
+void home_timeline_()
+{
+	load_status(data, "1", HOME_TIMELINE);
+}
+
+void public_timeline_()
+{
+	load_status(data, "1", PUBLIC_TIMELINE);
 }
 
 void about_me()
@@ -140,7 +160,7 @@ void gnusocialdesktop()
 	GdkPixbuf *pixbuf;
 	GtkWidget *picture;
         GtkWidget *w, *box1;
-	GtkWidget *button1, *button2, *button3;
+	GtkWidget *button1, *button2, *button3, *button4, *button5, *button6;
 	GtkWidget *label1, *label2, *label3, *label4;
 
         /* Creo la ventana */
@@ -159,19 +179,34 @@ void gnusocialdesktop()
 
 	/* Botón 1 */
 	button1 = gtk_button_new_with_label (MSG_1);
-	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (send_quit), (gpointer) "button 1");
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (send_quit), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button1, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button1,0,1,1,2);
 
 	button2 = gtk_button_new_with_label (MSG_2);
-	gtk_signal_connect (GTK_OBJECT (button2), "clicked", GTK_SIGNAL_FUNC (about_me), (gpointer) "button 1");
+	gtk_signal_connect (GTK_OBJECT (button2), "clicked", GTK_SIGNAL_FUNC (about_me), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button2, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button2,1,2,1,2);
 
 	button3 = gtk_button_new_with_label (MSG_15);
-	gtk_signal_connect (GTK_OBJECT (button3), "clicked", GTK_SIGNAL_FUNC (delete_config), (gpointer) "button 1");
+	gtk_signal_connect (GTK_OBJECT (button3), "clicked", GTK_SIGNAL_FUNC (delete_config), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button3, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button3,0,1,2,3);
+
+	button4 = gtk_button_new_with_label (MSG_18);
+	gtk_signal_connect (GTK_OBJECT (button4), "clicked", GTK_SIGNAL_FUNC (replies), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(box1), button4, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(box1),button4,1,2,2,3);
+
+	button5 = gtk_button_new_with_label (MSG_21);
+	gtk_signal_connect (GTK_OBJECT (button5), "clicked", GTK_SIGNAL_FUNC (home_timeline_), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(box1), button5, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(box1),button5,2,3,1,2);
+
+	button6 = gtk_button_new_with_label (MSG_22);
+	gtk_signal_connect (GTK_OBJECT (button6), "clicked", GTK_SIGNAL_FUNC (public_timeline_), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(box1), button6, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(box1),button6,2,3,2,3);
 
 	gtk_container_add(GTK_CONTAINER(w), box1);
 

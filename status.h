@@ -15,9 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UPDATE_STATUS_H
-#define UPDATE_STATUS_H
+#ifndef STATUS_H
+#define STATUS_H
 
-void update_status(GtkEntry *entry1, char data[4][32]);
+void answer_reply(char *id);
 
-#endif
+void load_status(char data[4][32], char *n, int mode);
+
+#endif 

@@ -16,6 +16,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include <curl/curl.h>
@@ -31,7 +32,16 @@ void write_data(char *buffer)
 	}
 }
 
-void update_status(GtkEntry *entry1, char data[5][32])
+int idlen(int id)
+{
+	int count = 1;
+	while (id /= 10 != 0) {
+		count++;
+	}
+	return count;
+}
+
+void update_status(GtkEntry *entry1, char data[4][32])
 {
 	char *protocol = data[0];
 	char *user = data[1];
@@ -51,8 +61,8 @@ void update_status(GtkEntry *entry1, char data[5][32])
 	curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 	curl_easy_setopt(curl, CURLOPT_USERNAME, user);
 	curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
-	char buffer[7+strlen(msg)];
-	strcpy(buffer, "status=");
+	char buffer[31+strlen(msg)];
+	strcpy(buffer, "source=GnuSocialDesktop&status=");
 	strcat(buffer, msg);
 
 	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, buffer);

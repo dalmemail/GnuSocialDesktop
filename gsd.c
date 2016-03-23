@@ -16,6 +16,8 @@
  */
 
 #include <gtk/gtk.h>
+#include <string.h>
+#include <stdio.h>
 #include "lang/spanish.h"
 
 void window_message(char *msg)
@@ -43,4 +45,40 @@ void window_message(char *msg)
 	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
 		label);
 	gtk_widget_show_all (dialog);
+}
+
+#include "status.h"
+
+char id[7];
+
+void run_answer_reply_()
+{
+	answer_reply(id);
+}
+
+void status_navigator(char status_data[][5][300], int number_of_states, int current_state)
+{
+	int status_size = 0;
+	for (int i = 0; i < 4; i++) {
+		status_size += strlen(status_data[current_state][i]);
+	}
+	char status_label[status_size+7];
+	strcpy(id, status_data[current_state][4]);
+	sprintf(status_label, "%s @%s > @%s\n%s", status_data[current_state][1], status_data[current_state][2], status_data[current_state][3], status_data[current_state][0]);
+	GtkWidget *table, *label1, *window;
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (window), MSG_19);
+    	gtk_signal_connect (GTK_OBJECT (window), "gtk_main_quit",
+        GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
+	table = gtk_table_new(3,2,FALSE);
+	gtk_container_add(GTK_CONTAINER(window),table);
+	label1 = gtk_label_new(status_label);
+	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
+	GtkWidget *button1 = gtk_button_new_with_label (MSG_20);
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (run_answer_reply_), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button1,0,2,1,2);
+	gtk_container_add(GTK_CONTAINER(window),table);
+        gtk_widget_show_all(window);
+        gtk_main();
 }
