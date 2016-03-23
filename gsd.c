@@ -56,6 +56,14 @@ void run_answer_reply_()
 	answer_reply(id);
 }
 
+GtkWidget *window;
+
+void exit_navigator()
+{
+	gtk_widget_destroy(window);
+	gtk_main_quit();
+}
+
 void status_navigator(char status_data[5][300])
 {
 	int status_size = 0;
@@ -63,9 +71,9 @@ void status_navigator(char status_data[5][300])
 		status_size += strlen(status_data[i]);
 	}
 	char status_label[status_size+7];
-	strcpy(id, status_data[4]);
+	strcpy(id, status_data[2]);
 	sprintf(status_label, "%s @%s\n%s\n%s", status_data[3], status_data[4], status_data[0], status_data[1]);
-	GtkWidget *table, *label1, *window;
+	GtkWidget *table, *label1;
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title (GTK_WINDOW (window), MSG_19);
     	gtk_signal_connect (GTK_OBJECT (window), "gtk_main_quit",
@@ -78,6 +86,10 @@ void status_navigator(char status_data[5][300])
 	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (run_answer_reply_), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(table),button1,0,2,1,2);
+	GtkWidget *button2 = gtk_button_new_with_label (MSG_23);
+	gtk_signal_connect (GTK_OBJECT (button2), "clicked", GTK_SIGNAL_FUNC (exit_navigator), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button2, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button2,0,2,2,3);
 	gtk_container_add(GTK_CONTAINER(window),table);
         gtk_widget_show_all(window);
         gtk_main();

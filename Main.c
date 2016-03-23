@@ -75,17 +75,101 @@ void send_quit()
 
 void replies()
 {
-	load_status(data, "1", REPLY);
+	char *p = gtk_entry_get_text(quit_message_entry);
+	char states_to_be_load[8];
+	strcpy(states_to_be_load, p);
+	gtk_widget_destroy(window);
+	gtk_main_quit();
+	load_status(data, states_to_be_load, REPLY);
+}
+
+void execute_replies()
+{
+	GtkWidget *table, *label1;
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (window), MSG_7);
+    	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+        GTK_SIGNAL_FUNC (delete_event), NULL);
+	table = gtk_table_new(3,2,FALSE);
+	gtk_container_add(GTK_CONTAINER(window),table);
+	label1 = gtk_label_new(MSG_24);
+	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
+	quit_message_entry = gtk_entry_new();
+	gtk_table_attach_defaults(GTK_TABLE(table),quit_message_entry,0,1,1,2);
+	gtk_entry_set_visibility(GTK_ENTRY(quit_message_entry),TRUE);
+	GtkWidget *button1 = gtk_button_new_with_label (MSG_23);
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (replies), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button1,1,2,1,2);
+	gtk_container_add(GTK_CONTAINER(window),table);
+        gtk_widget_show_all(window);
+        gtk_main();
 }
 
 void home_timeline_()
 {
-	load_status(data, "1", HOME_TIMELINE);
+	char *p = gtk_entry_get_text(quit_message_entry);
+	char states_to_be_load[8];
+	strcpy(states_to_be_load, p);
+	gtk_widget_destroy(window);
+	gtk_main_quit();
+	load_status(data, states_to_be_load, HOME_TIMELINE);
+}
+
+void execute_ht()
+{
+	GtkWidget *table, *label1;
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (window), MSG_7);
+    	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+        GTK_SIGNAL_FUNC (delete_event), NULL);
+	table = gtk_table_new(3,2,FALSE);
+	gtk_container_add(GTK_CONTAINER(window),table);
+	label1 = gtk_label_new(MSG_24);
+	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
+	quit_message_entry = gtk_entry_new();
+	gtk_table_attach_defaults(GTK_TABLE(table),quit_message_entry,0,1,1,2);
+	gtk_entry_set_visibility(GTK_ENTRY(quit_message_entry),TRUE);
+	GtkWidget *button1 = gtk_button_new_with_label (MSG_23);
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (home_timeline_), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button1,1,2,1,2);
+	gtk_container_add(GTK_CONTAINER(window),table);
+        gtk_widget_show_all(window);
+        gtk_main();
 }
 
 void public_timeline_()
 {
-	load_status(data, "1", PUBLIC_TIMELINE);
+	char *p = gtk_entry_get_text(quit_message_entry);
+	char states_to_be_load[8];
+	strcpy(states_to_be_load, p);
+	gtk_widget_destroy(window);
+	gtk_main_quit();
+	load_status(data, states_to_be_load, PUBLIC_TIMELINE);
+}
+
+void execute_pt()
+{
+	GtkWidget *table, *label1;
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (window), MSG_7);
+    	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+        GTK_SIGNAL_FUNC (delete_event), NULL);
+	table = gtk_table_new(3,2,FALSE);
+	gtk_container_add(GTK_CONTAINER(window),table);
+	label1 = gtk_label_new(MSG_24);
+	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
+	quit_message_entry = gtk_entry_new();
+	gtk_table_attach_defaults(GTK_TABLE(table),quit_message_entry,0,1,1,2);
+	gtk_entry_set_visibility(GTK_ENTRY(quit_message_entry),TRUE);
+	GtkWidget *button1 = gtk_button_new_with_label (MSG_23);
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (public_timeline_), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button1,1,2,1,2);
+	gtk_container_add(GTK_CONTAINER(window),table);
+        gtk_widget_show_all(window);
+        gtk_main();
 }
 
 void about_me()
@@ -194,17 +278,17 @@ void gnusocialdesktop()
 	gtk_table_attach_defaults(GTK_TABLE(box1),button3,0,1,2,3);
 
 	button4 = gtk_button_new_with_label (MSG_18);
-	gtk_signal_connect (GTK_OBJECT (button4), "clicked", GTK_SIGNAL_FUNC (replies), (gpointer) NULL);
+	gtk_signal_connect (GTK_OBJECT (button4), "clicked", GTK_SIGNAL_FUNC (execute_replies), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button4, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button4,1,2,2,3);
 
 	button5 = gtk_button_new_with_label (MSG_21);
-	gtk_signal_connect (GTK_OBJECT (button5), "clicked", GTK_SIGNAL_FUNC (home_timeline_), (gpointer) NULL);
+	gtk_signal_connect (GTK_OBJECT (button5), "clicked", GTK_SIGNAL_FUNC (execute_ht), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button5, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button5,2,3,1,2);
 
 	button6 = gtk_button_new_with_label (MSG_22);
-	gtk_signal_connect (GTK_OBJECT (button6), "clicked", GTK_SIGNAL_FUNC (public_timeline_), (gpointer) NULL);
+	gtk_signal_connect (GTK_OBJECT (button6), "clicked", GTK_SIGNAL_FUNC (execute_pt), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button6, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button6,2,3,2,3);
 

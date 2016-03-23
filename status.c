@@ -60,7 +60,6 @@ void print_reply(char *buffer)
 			start_pos = pos+1;
 			for (int y = 0; buffer[start_pos+y] != '<' ||buffer[start_pos+y+1] != '/'; y++) {
 				reply[i][x][y] = buffer[start_pos+y];
-				printf("%c", reply[i][x][y]);
 			}
 		}
 	}

@@ -20,5 +20,5 @@
 #define MSG_20 "Responder"
 #define MSG_21 "Línea Temporal"
 #define MSG_22 "Línea Temporal Pública"
-#define MSG_23 "Siguiente"
-#define MSG_24 "Anterior"
+#define MSG_23 "Continuar"
+#define MSG_24 "¿Cuantos estados deben ser descargados?"
