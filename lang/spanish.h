@@ -15,3 +15,8 @@
 #define MSG_15 "Eliminar Usuario"
 #define MSG_16 "Ha ocurrido un error al intentar eliminar su configuración de usuario.\nIntente borrar el archivo \"gsd.config\" manualmente."
 #define MSG_17 "Su configuración de usuario ha sido eliminada.\nPara crear una nueva configuración de usuario reinicie GSD"
+#define MSG_18 "Menciones"
+#define MSG_19 "Estado"
+#define MSG_20 "Responder"
+#define MSG_21 "Línea Temporal"
+#define MSG_22 "Línea Temporal Pública"
