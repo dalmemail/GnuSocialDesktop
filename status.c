@@ -35,40 +35,38 @@ char user_data[4][32];
 
 void print_reply(char *buffer)
 {
-	char reply[1][5][300];
-	char tofind[5][32] = {"<text>", "<name>", "<screen_name>", "<in_reply_to_screen_name>", "<id>"};
-	for (int i = 0; i < 1; i++) {
+	char reply[number_of_replies][5][300];
+	char tofind[5][32] = {"<text>", "<created_at>", "<id>", "<name>", "<screen_name>"};
+	int pos = 0;
+	int act_pos = 0;
+	int start_pos = 0;
+	for (int i = 0; i < number_of_replies; i++) {
 		for (int x = 0; x < 5; x++) {
-		  int pos = 0;
-		  int start_pos;
-		  for (start_pos = 0; start_pos < strlen(buffer) && pos < strlen(tofind[x]); start_pos++) {
-		    if (buffer[start_pos] == tofind[x][pos]) {
-		      pos++;
-		    }
-		    else {
-		      pos = 0;
-		    }
-		  }
-		  if (pos == strlen(tofind[x])) {
-		    int final_pos = start_pos-1;
-			while (buffer[final_pos+1] != '<' || buffer[final_pos+2] != '/') {
-				final_pos++;
+			for (int y = 0; y < 300; y++) {
+				reply[i][x][y] = '\0';
 			}
-		    char message[(final_pos-start_pos)+1];
-		    for (int y = 0; y < (final_pos-start_pos)+1; y++) {
-		      message[y] = buffer[start_pos+y];
-			if (y == (final_pos-start_pos)) {
-				strcpy(reply[i][x], message);
-				reply[i][x][y+1] = '\0';
+			act_pos = 0;
+			for (int y = pos; act_pos != strlen(tofind[x]); y++) {
+				if (tofind[x][act_pos] == buffer[y]) {
+					act_pos++;
+					if (act_pos == strlen(tofind[x])) {
+						pos = y;
+					}
+				}
+				else {
+					act_pos = 0;
+				}
 			}
-		    }
-		  }
+			start_pos = pos+1;
+			for (int y = 0; buffer[start_pos+y] != '<' ||buffer[start_pos+y+1] != '/'; y++) {
+				reply[i][x][y] = buffer[start_pos+y];
+				printf("%c", reply[i][x][y]);
+			}
 		}
 	}
-	for (int i = 0; i < 5; i++) {
-		printf("%s\n", reply[0][i]);
+	for (int i = 0; i < number_of_replies; i++) {
+		status_navigator(reply[i]);
 	}
-	status_navigator(reply, number_of_replies, 0);
 }
 
 char nid[7];
@@ -114,7 +112,7 @@ void answer_(GtkEntry *entry1, char data[4][32], char *id)
 	curl_easy_perform(curl);
 
 	curl_easy_cleanup(curl);
-	printf("\n\n%s\n\n%d", buffer, id);
+
 }
 
 void run_answer_reply()
@@ -148,6 +146,12 @@ void answer_reply(char *id)
         gtk_main();
 }
 
+/* the source code of load_xml() is from gitn (http://linuxinthenight.com) */
+size_t save_xml(void *ptr, size_t size, size_t nmemb, FILE *stream) {
+	size_t written = fwrite(ptr, size, nmemb, stream);
+	return written;
+}
+
 void load_status(char data[4][32], char *n, int mode)
 {
 	for (int i = 0; i < 4; i++) {
@@ -177,13 +181,24 @@ void load_status(char data[4][32], char *n, int mode)
 	char to_read[16];
 	strcpy(to_read, "count=");
 	strcat(to_read, n);
+	FILE *xml = fopen("temp/file.xml", "wb");
 	CURL *curl = curl_easy_init();
         curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_USERPWD, user);
         curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
         curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, to_read);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, print_reply);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, save_xml);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, xml);
         curl_easy_perform(curl);
         curl_easy_cleanup(curl);
+	fclose(xml);
+	xml = fopen("temp/file.xml", "r");
+	fseek(xml, 0L, SEEK_END);
+	int filesize = ftell(xml);
+	rewind(xml);
+	char xml_data[filesize];
+	fread(xml_data, filesize, filesize, xml);
+	fclose(xml);
+	print_reply(xml_data);
 }

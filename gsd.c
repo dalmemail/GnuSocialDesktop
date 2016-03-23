@@ -56,15 +56,15 @@ void run_answer_reply_()
 	answer_reply(id);
 }
 
-void status_navigator(char status_data[][5][300], int number_of_states, int current_state)
+void status_navigator(char status_data[5][300])
 {
 	int status_size = 0;
 	for (int i = 0; i < 4; i++) {
-		status_size += strlen(status_data[current_state][i]);
+		status_size += strlen(status_data[i]);
 	}
 	char status_label[status_size+7];
-	strcpy(id, status_data[current_state][4]);
-	sprintf(status_label, "%s @%s > @%s\n%s", status_data[current_state][1], status_data[current_state][2], status_data[current_state][3], status_data[current_state][0]);
+	strcpy(id, status_data[4]);
+	sprintf(status_label, "%s @%s\n%s\n%s", status_data[3], status_data[4], status_data[0], status_data[1]);
 	GtkWidget *table, *label1, *window;
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title (GTK_WINDOW (window), MSG_19);

@@ -20,6 +20,6 @@
 
 void window_message(char *msg);
 
-void status_navigator(char status_data[][5][300], int number_of_states, int current_state);
+void status_navigator(char status_data[5][300]);
 
 #endif 
