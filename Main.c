@@ -184,7 +184,7 @@ void about_me()
 		GTK_STOCK_OK,
 		GTK_RESPONSE_NONE,
 		NULL);
-	label = gtk_label_new ("\t\t\tGnuSocial Desktop v0.3 \"Arathorn\"\n\tGSD es un sencillo cliente de la Red Social Libre\
+	label = gtk_label_new ("\t\t\tGnuSocial Desktop v0.4 \"Aragorn\"\n\tGSD es un sencillo cliente de la Red Social Libre\
 		\nGNUSocial escrito en C y GTK por <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com");
 
 	pixbuf = gdk_pixbuf_new_from_file_at_scale("logo.png",175,55,FALSE,NULL);
@@ -239,12 +239,40 @@ void delete_config()
 	}
 }
 
+void run_find_status_by_id()
+{
+	find_status_by_id(data, quit_message_entry);
+}
+
+void ask_me_id()
+{
+	GtkWidget *table, *label1;
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (window), MSG_25);
+    	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+        GTK_SIGNAL_FUNC (delete_event), NULL);
+	table = gtk_table_new(3,2,FALSE);
+	gtk_container_add(GTK_CONTAINER(window),table);
+	label1 = gtk_label_new(MSG_26);
+	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
+	quit_message_entry = gtk_entry_new();
+	gtk_table_attach_defaults(GTK_TABLE(table),quit_message_entry,1,2,0,1);
+	gtk_entry_set_visibility(GTK_ENTRY(quit_message_entry),TRUE);
+	GtkWidget *button1 = gtk_button_new_with_label (MSG_23);
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (run_find_status_by_id), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button1,1,2,1,2);
+	gtk_container_add(GTK_CONTAINER(window),table);
+        gtk_widget_show_all(window);
+        gtk_main();
+}
+
 void gnusocialdesktop()
 {
 	GdkPixbuf *pixbuf;
 	GtkWidget *picture;
         GtkWidget *w, *box1;
-	GtkWidget *button1, *button2, *button3, *button4, *button5, *button6;
+	GtkWidget *button1, *button2, *button3, *button4, *button5, *button6, *button7;
 	GtkWidget *label1, *label2, *label3, *label4;
 
         /* Creo la ventana */
@@ -291,6 +319,11 @@ void gnusocialdesktop()
 	gtk_signal_connect (GTK_OBJECT (button6), "clicked", GTK_SIGNAL_FUNC (execute_pt), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button6, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button6,2,3,2,3);
+
+	button7 = gtk_button_new_with_label (MSG_25);
+	gtk_signal_connect (GTK_OBJECT (button7), "clicked", GTK_SIGNAL_FUNC (ask_me_id), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(box1), button7, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(box1),button7,3,4,1,2);
 
 	gtk_container_add(GTK_CONTAINER(w), box1);
 

@@ -145,7 +145,7 @@ void answer_reply(char *id)
         gtk_main();
 }
 
-/* the source code of load_xml() is from gitn (http://linuxinthenight.com) */
+/* the source code of save_xml() is from gitn (http://linuxinthenight.com) */
 size_t save_xml(void *ptr, size_t size, size_t nmemb, FILE *stream) {
 	size_t written = fwrite(ptr, size, nmemb, stream);
 	return written;
@@ -200,4 +200,45 @@ void load_status(char data[4][32], char *n, int mode)
 	fread(xml_data, filesize, filesize, xml);
 	fclose(xml);
 	print_reply(xml_data);
+}
+
+void find_status_by_id(char data[4][32], GtkEntry *gtk_id)
+{
+	for (int i = 0; i < 4; i++) {
+		strcpy(user_data[i], data[i]);
+	}
+	number_of_replies = 1;
+	char *id = gtk_entry_get_text(gtk_id);
+	char *protocol = data[0];
+	char *user = data[1];
+	char *server = data[2];
+	char *password = data[3];
+	char url[100];
+	strcpy(url, protocol);
+	strcat(url, "://");
+	strcat(url, server);
+	strcat(url, "/api/statuses/show.xml&id=");
+	strcat(url, id);
+	FILE *xml = fopen("temp/file.xml", "wb");
+	CURL *curl = curl_easy_init();
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_USERPWD, user);
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
+        curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, save_xml);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, xml);
+        curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+	fclose(xml);
+	xml = fopen("temp/file.xml", "r");
+	fseek(xml, 0L, SEEK_END);
+	int filesize = ftell(xml);
+	rewind(xml);
+	char xml_data[filesize];
+	fread(xml_data, filesize, filesize, xml);
+	fclose(xml);
+	printf("%s", xml_data);
+	if ((GSDParser("error", xml_data)) == 0) {
+		print_reply(xml_data);
+	}
 }

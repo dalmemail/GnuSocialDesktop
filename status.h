@@ -22,4 +22,6 @@ void answer_reply(char *id);
 
 void load_status(char data[4][32], char *n, int mode);
 
+void find_status_by_id(char data[4][32], GtkEntry *gtk_id);
+
 #endif 

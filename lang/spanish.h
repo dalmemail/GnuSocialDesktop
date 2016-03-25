@@ -22,3 +22,5 @@
 #define MSG_22 "Línea Temporal Pública"
 #define MSG_23 "Continuar"
 #define MSG_24 "¿Cuantos estados deben ser descargados?"
+#define MSG_25 "Buscar Estado"
+#define MSG_26 "ID: "
