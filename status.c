@@ -290,3 +290,43 @@ void delete_status_by_id(char *id)
 		window_message(MSG_29);
 	}
 }
+
+void show_user_timeline(char data[4][32], char *n)
+{
+	for (int i = 0; i < 4; i++) {
+		strcpy(user_data[i], data[i]);
+	}
+	number_of_replies = atoi(n);
+	char *protocol = data[0];
+	char *user = data[1];
+	char *server = data[2];
+	char *password = data[3];
+	char url[100];
+	strcpy(url, protocol);
+	strcat(url, "://");
+	strcat(url, server);
+	strcat(url, "/api/statuses/user_timeline.xml&count=");
+	strcat(url, n);
+	FILE *xml = fopen("temp/file.xml", "wb");
+	CURL *curl = curl_easy_init();
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_USERPWD, user);
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
+        curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, save_xml);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, xml);
+        curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+	fclose(xml);
+	xml = fopen("temp/file.xml", "r");
+	fseek(xml, 0L, SEEK_END);
+	int filesize = ftell(xml);
+	rewind(xml);
+	char xml_data[filesize];
+	fread(xml_data, filesize, filesize, xml);
+	fclose(xml);
+	printf("%s", xml_data);
+	if ((GSDParser("<error>", xml_data)) == 0) {
+		print_reply(xml_data);
+	}
+}

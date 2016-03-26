@@ -27,3 +27,4 @@
 #define MSG_27 "Error: ID Incorrecta"
 #define MSG_28 "Eliminar Estado"
 #define MSG_29 "Estado Eliminado Correctamente"
+#define MSG_30 "Mi Línea Temporal"

@@ -149,6 +149,16 @@ void public_timeline_()
 	load_status(data, states_to_be_load, PUBLIC_TIMELINE);
 }
 
+void user_timeline_()
+{
+	char *p = gtk_entry_get_text(quit_message_entry);
+	char states_to_be_load[8];
+	strcpy(states_to_be_load, p);
+	gtk_widget_destroy(window);
+	gtk_main_quit();
+	show_user_timeline(data, states_to_be_load);
+}
+
 void execute_pt()
 {
 	GtkWidget *table, *label1;
@@ -165,6 +175,29 @@ void execute_pt()
 	gtk_entry_set_visibility(GTK_ENTRY(quit_message_entry),TRUE);
 	GtkWidget *button1 = gtk_button_new_with_label (MSG_23);
 	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (public_timeline_), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button1,1,2,1,2);
+	gtk_container_add(GTK_CONTAINER(window),table);
+        gtk_widget_show_all(window);
+        gtk_main();
+}
+
+void execute_ut()
+{
+	GtkWidget *table, *label1;
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (window), MSG_7);
+    	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+        GTK_SIGNAL_FUNC (delete_event), NULL);
+	table = gtk_table_new(3,2,FALSE);
+	gtk_container_add(GTK_CONTAINER(window),table);
+	label1 = gtk_label_new(MSG_24);
+	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
+	quit_message_entry = gtk_entry_new();
+	gtk_table_attach_defaults(GTK_TABLE(table),quit_message_entry,0,1,1,2);
+	gtk_entry_set_visibility(GTK_ENTRY(quit_message_entry),TRUE);
+	GtkWidget *button1 = gtk_button_new_with_label (MSG_23);
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (user_timeline_), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(table),button1,1,2,1,2);
 	gtk_container_add(GTK_CONTAINER(window),table);
@@ -272,7 +305,7 @@ void gnusocialdesktop()
 	GdkPixbuf *pixbuf;
 	GtkWidget *picture;
         GtkWidget *w, *box1;
-	GtkWidget *button1, *button2, *button3, *button4, *button5, *button6, *button7;
+	GtkWidget *button1, *button2, *button3, *button4, *button5, *button6, *button7, *button8;
 	GtkWidget *label1, *label2, *label3, *label4;
 
         /* Creo la ventana */
@@ -287,7 +320,7 @@ void gnusocialdesktop()
         /* Cargamos el logo. */
 	pixbuf = gdk_pixbuf_new_from_file_at_scale("logo.png",350,110,FALSE,NULL);
 	picture=gtk_image_new_from_pixbuf(pixbuf);
-	gtk_table_attach_defaults(GTK_TABLE(box1),picture,0,2,0,1);
+	gtk_table_attach_defaults(GTK_TABLE(box1),picture,0,4,0,1);
 
 	/* Botón 1 */
 	button1 = gtk_button_new_with_label (MSG_1);
@@ -324,6 +357,11 @@ void gnusocialdesktop()
 	gtk_signal_connect (GTK_OBJECT (button7), "clicked", GTK_SIGNAL_FUNC (ask_me_id), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button7, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button7,3,4,1,2);
+
+	button8 = gtk_button_new_with_label (MSG_30);
+	gtk_signal_connect (GTK_OBJECT (button8), "clicked", GTK_SIGNAL_FUNC (execute_ut), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(box1), button8, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(box1),button8,3,4,2,3);
 
 	gtk_container_add(GTK_CONTAINER(w), box1);
 
