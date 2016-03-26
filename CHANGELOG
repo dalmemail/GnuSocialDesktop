@@ -26,6 +26,7 @@ excepción de la contraseña.
 v0.4 "Aragorn" (??-??-2016)
 ---------------------------
 [+] Posibilidad de buscar (y mostrar) un estado a través de su ID.
+[+] Posibilidad de eliminar un estado a través de su ID.
 
 -------------------------
 -------------------------

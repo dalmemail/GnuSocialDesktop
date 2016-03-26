@@ -24,3 +24,6 @@
 #define MSG_24 "¿Cuantos estados deben ser descargados?"
 #define MSG_25 "Buscar Estado"
 #define MSG_26 "ID: "
+#define MSG_27 "Error: ID Incorrecta"
+#define MSG_28 "Eliminar Estado"
+#define MSG_29 "Estado Eliminado Correctamente"

@@ -64,6 +64,11 @@ void exit_navigator()
 	gtk_main_quit();
 }
 
+void delete_status()
+{
+	delete_status_by_id(id);
+}
+
 void status_navigator(char status_data[5][300])
 {
 	int status_size = 0;
@@ -86,10 +91,14 @@ void status_navigator(char status_data[5][300])
 	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (run_answer_reply_), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(table),button1,0,2,1,2);
+	GtkWidget *button3 = gtk_button_new_with_label (MSG_28);
+	gtk_signal_connect (GTK_OBJECT (button3), "clicked", GTK_SIGNAL_FUNC (delete_status), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button3, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button3,0,2,2,3);
 	GtkWidget *button2 = gtk_button_new_with_label (MSG_23);
 	gtk_signal_connect (GTK_OBJECT (button2), "clicked", GTK_SIGNAL_FUNC (exit_navigator), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(table), button2, TRUE, TRUE, 0);
-	gtk_table_attach_defaults(GTK_TABLE(table),button2,0,2,2,3);
+	gtk_table_attach_defaults(GTK_TABLE(table),button2,0,2,3,4);
 	gtk_container_add(GTK_CONTAINER(window),table);
         gtk_widget_show_all(window);
         gtk_main();

@@ -27,7 +27,7 @@
 void write_data(char *buffer)
 {
 	printf("%s", buffer);
-	if ((GSDParser("error", buffer)) == 0) {
+	if ((GSDParser("<error>", buffer)) == 0) {
 	  window_message("Mensaje Publicado Correctamente");
 	}
 }

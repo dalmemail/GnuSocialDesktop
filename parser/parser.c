@@ -33,7 +33,6 @@ int GSDParser(char *tofind, char *buffer)
   }
   if (pos == strlen(tofind)) {
     res++;
-    start_pos++;
     int final_pos = start_pos;
     while (buffer[final_pos+1] != '<' && buffer[final_pos+2] != '/' && final_pos < strlen(buffer)) {
       final_pos++;
@@ -41,6 +40,9 @@ int GSDParser(char *tofind, char *buffer)
     char error_message[final_pos-start_pos];
     for (int i = 0; i < (final_pos-start_pos); i++) {
       error_message[i] = buffer[start_pos+i];
+	if ((i+1) == (final_pos-start_pos)) {
+		error_message[i+1] = '\0';
+	}
     }
     window_message(error_message);
   }
