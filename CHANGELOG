@@ -12,7 +12,7 @@ v0.2 "Gimli" (23-01-2016)
 [+] Sistema de notificación de errores/New error system
 [-] Posibilidad de enviar quits pulsando "enter"/Send quits using "enter"
 
-v0.3 "Arathorn" (??-??-2016)
+v0.3 "Arathorn" (23-03-2016)
 ----------------------------
 [+] Posibilidad de configurar una cuenta de forma indefinida, sin necesidad
 de rellenar los datos de conexión cada vez que se ejecuta el programa a
@@ -23,6 +23,11 @@ excepción de la contraseña.
 [+] Capacidad para leer estados de la línea del usuario (home timeline)
 [+] Capacidad para leer estados de la línea temporal pública (public timeline)
 
+v0.4 "Aragorn" (??-??-2016)
+---------------------------
+[+] Posibilidad de buscar (y mostrar) un estado a través de su ID.
+
+-------------------------
 -------------------------
 [+] Añadido/Added
 [-] Eliminado/Removed
