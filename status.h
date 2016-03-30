@@ -26,4 +26,6 @@ void find_status_by_id(char data[4][32], GtkEntry *gtk_id);
 
 void delete_status_by_id(char *id);
 
+void favorite(char *id, int mode);
+
 #endif 

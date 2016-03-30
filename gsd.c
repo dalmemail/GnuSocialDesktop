@@ -18,7 +18,10 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdio.h>
-#include "lang/spanish.h"
+#include "lang/lang.h"
+
+#define CREATE 0
+#define DELETE 1
 
 void window_message(char *msg)
 {
@@ -69,6 +72,16 @@ void delete_status()
 	delete_status_by_id(id);
 }
 
+void make_favorite()
+{
+	favorites(id, CREATE);
+}
+
+void delete_favorite()
+{
+	favorites(id, DELETE);
+}
+
 void status_navigator(char status_data[5][300])
 {
 	int status_size = 0;
@@ -95,10 +108,18 @@ void status_navigator(char status_data[5][300])
 	gtk_signal_connect (GTK_OBJECT (button3), "clicked", GTK_SIGNAL_FUNC (delete_status), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(table), button3, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(table),button3,0,2,2,3);
+	GtkWidget *button4 = gtk_button_new_with_label (MSG_32);
+	gtk_signal_connect (GTK_OBJECT (button4), "clicked", GTK_SIGNAL_FUNC (make_favorite), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button4, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button4,0,2,3,4);
+	GtkWidget *button5 = gtk_button_new_with_label (MSG_33);
+	gtk_signal_connect (GTK_OBJECT (button5), "clicked", GTK_SIGNAL_FUNC (delete_favorite), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button5, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button5,0,2,4,5);
 	GtkWidget *button2 = gtk_button_new_with_label (MSG_23);
 	gtk_signal_connect (GTK_OBJECT (button2), "clicked", GTK_SIGNAL_FUNC (exit_navigator), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(table), button2, TRUE, TRUE, 0);
-	gtk_table_attach_defaults(GTK_TABLE(table),button2,0,2,3,4);
+	gtk_table_attach_defaults(GTK_TABLE(table),button2,0,2,5,6);
 	gtk_container_add(GTK_CONTAINER(window),table);
         gtk_widget_show_all(window);
         gtk_main();

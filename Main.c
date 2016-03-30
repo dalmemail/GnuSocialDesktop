@@ -20,13 +20,14 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "update_status.h"
-#include "lang/spanish.h"
+#include "lang/lang.h"
 #include "gsd.h"
 #include "status.h"
 
 #define REPLY 0
 #define HOME_TIMELINE 1
 #define PUBLIC_TIMELINE 2
+#define FAVORITES 3
 
 gint delete_event( GtkWidget *widget,
                    GdkEvent  *event,
@@ -159,6 +160,16 @@ void user_timeline_()
 	show_user_timeline(data, states_to_be_load);
 }
 
+void favorites_()
+{
+	char *p = gtk_entry_get_text(quit_message_entry);
+	char states_to_be_load[8];
+	strcpy(states_to_be_load, p);
+	gtk_widget_destroy(window);
+	gtk_main_quit();
+	load_status(data, states_to_be_load, FAVORITES);
+}
+
 void execute_pt()
 {
 	GtkWidget *table, *label1;
@@ -205,6 +216,29 @@ void execute_ut()
         gtk_main();
 }
 
+void execute_fav()
+{
+	GtkWidget *table, *label1;
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title (GTK_WINDOW (window), MSG_7);
+    	gtk_signal_connect (GTK_OBJECT (window), "delete_event",
+        GTK_SIGNAL_FUNC (delete_event), NULL);
+	table = gtk_table_new(3,2,FALSE);
+	gtk_container_add(GTK_CONTAINER(window),table);
+	label1 = gtk_label_new(MSG_24);
+	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
+	quit_message_entry = gtk_entry_new();
+	gtk_table_attach_defaults(GTK_TABLE(table),quit_message_entry,0,1,1,2);
+	gtk_entry_set_visibility(GTK_ENTRY(quit_message_entry),TRUE);
+	GtkWidget *button1 = gtk_button_new_with_label (MSG_23);
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (favorites_), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(table), button1, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(table),button1,1,2,1,2);
+	gtk_container_add(GTK_CONTAINER(window),table);
+        gtk_widget_show_all(window);
+        gtk_main();
+}
+
 void about_me()
 {
 	GtkWidget *dialog, *label;
@@ -217,8 +251,7 @@ void about_me()
 		GTK_STOCK_OK,
 		GTK_RESPONSE_NONE,
 		NULL);
-	label = gtk_label_new ("\t\t\tGnuSocial Desktop v0.4 \"Aragorn\"\n\tGSD es un sencillo cliente de la Red Social Libre\
-		\nGNUSocial escrito en C y GTK por <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com");
+	label = gtk_label_new (MSG_0);
 
 	pixbuf = gdk_pixbuf_new_from_file_at_scale("logo.png",175,55,FALSE,NULL);
 	picture=gtk_image_new_from_pixbuf(pixbuf);
@@ -305,7 +338,7 @@ void gnusocialdesktop()
 	GdkPixbuf *pixbuf;
 	GtkWidget *picture;
         GtkWidget *w, *box1;
-	GtkWidget *button1, *button2, *button3, *button4, *button5, *button6, *button7, *button8;
+	GtkWidget *button1, *button2, *button3, *button4, *button5, *button6, *button7, *button8, *button9;
 	GtkWidget *label1, *label2, *label3, *label4;
 
         /* Creo la ventana */
@@ -362,6 +395,11 @@ void gnusocialdesktop()
 	gtk_signal_connect (GTK_OBJECT (button8), "clicked", GTK_SIGNAL_FUNC (execute_ut), (gpointer) NULL);
 	gtk_box_pack_start(GTK_BOX(box1), button8, TRUE, TRUE, 0);
 	gtk_table_attach_defaults(GTK_TABLE(box1),button8,3,4,2,3);
+
+	button9 = gtk_button_new_with_label (MSG_31);
+	gtk_signal_connect (GTK_OBJECT (button9), "clicked", GTK_SIGNAL_FUNC (execute_fav), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(box1), button9, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(box1),button9,0,1,3,4);
 
 	gtk_container_add(GTK_CONTAINER(w), box1);
 

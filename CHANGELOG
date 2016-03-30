@@ -23,11 +23,18 @@ excepción de la contraseña.
 [+] Capacidad para leer estados de la línea del usuario (home timeline)
 [+] Capacidad para leer estados de la línea temporal pública (public timeline)
 
-v0.4 "Aragorn" (??-??-2016)
+v0.4 "Aragorn" (26-03-2016)
 ---------------------------
 [+] Posibilidad de buscar (y mostrar) un estado a través de su ID.
 [+] Posibilidad de eliminar un estado a través de su ID.
 [+] Capacidad para leer la lista de estados publicados por el usuario.
+
+v0.5 "Aranarth" (30-03-2016)
+----------------------------
+[+] Mostrar la lista de favoritos del usuario.
+[+] Capacidad para marcar como favorito un estado.
+[+] Capacidad para desmarcar como favorito un estado.
+[+] Soporte multi-idioma (Español, Inglés, Francés).
 
 -------------------------
 -------------------------

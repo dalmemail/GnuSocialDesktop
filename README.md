@@ -6,7 +6,18 @@ GnuSocialDesktop is a client write in C and GTK for GNU/Linux-based Operating Sy
 	- libgtk2.0-dev
 * Compile
 
-	`$ make`
+	- In English:
+
+	`$ make english`
+
+	- In Spanish:
+
+	`$ make spanish`
+
+	- In French:
+
+	`$ make french`
+
 * Execute
 
 	`$ ./gsd`

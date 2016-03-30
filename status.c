@@ -20,7 +20,7 @@
 #include <stdlib.h>
 #include <curl/curl.h>
 #include <gtk/gtk.h>
-#include "lang/spanish.h"
+#include "lang/lang.h"
 #include "status.h"
 #include "gsd.h"
 #include "parser/parser.h"
@@ -28,6 +28,10 @@
 #define REPLY 0
 #define HOME_TIMELINE 1
 #define PUBLIC_TIMELINE 2
+#define FAVORITES 3
+
+#define CREATE 0
+#define DELETE 1
 
 int number_of_replies = 0;
 
@@ -165,16 +169,19 @@ void load_status(char data[4][32], char *n, int mode)
 	strcpy(url, protocol);
 	strcat(url, "://");
 	strcat(url, server);
-	strcat(url, "/api/statuses/");
+	strcat(url, "/api/");
 	switch (mode) {
 		case REPLY:
-			strcat(url, "mentions.xml");
+			strcat(url, "statuses/mentions.xml");
 			break;
 		case HOME_TIMELINE:
-			strcat(url, "home_timeline.xml");
+			strcat(url, "statuses/home_timeline.xml");
 			break;
 		case PUBLIC_TIMELINE:
-			strcat(url, "public_timeline.xml");
+			strcat(url, "statuses/public_timeline.xml");
+			break;
+		case FAVORITES:
+			strcat(url, "favorites.xml");
 			break;
 	}
 	char to_read[16];
@@ -239,7 +246,7 @@ void find_status_by_id(char data[4][32], GtkEntry *gtk_id)
 		fread(xml_data, filesize, filesize, xml);
 		fclose(xml);
 		printf("%s", xml_data);
-		if ((GSDParser("error", xml_data)) == 0) {
+		if ((GSDParser("<error>", xml_data)) == 0) {
 			print_reply(xml_data);
 		}
 	}
@@ -328,5 +335,60 @@ void show_user_timeline(char data[4][32], char *n)
 	printf("%s", xml_data);
 	if ((GSDParser("<error>", xml_data)) == 0) {
 		print_reply(xml_data);
+	}
+}
+
+void favorites(char *id, int mode)
+{
+	char *protocol = user_data[0];
+	char *user = user_data[1];
+	char *server = user_data[2];
+	char *password = user_data[3];
+	char url[100];
+	char buffer[3+strlen(id)];
+	strcpy(url, protocol);
+	strcat(url, "://");
+	strcat(url, server);
+	strcat(url, "/api/favorites/");
+	if (mode == CREATE) {
+		strcat(url, "create.xml");
+	}
+	else {
+		strcat(url, "destroy.xml");
+	}
+	strcpy(buffer, "id=");
+	strcat(buffer, id);
+	FILE *xml = fopen("temp/file.xml", "wb");
+	CURL *curl = curl_easy_init();
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_USERPWD, user);
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
+        curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, save_xml);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, xml);
+	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, buffer);
+        curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+	fclose(xml);
+	xml = fopen("temp/file.xml", "r");
+	fseek(xml, 0L, SEEK_END);
+	int filesize = ftell(xml);
+	rewind(xml);
+	if (filesize > 0) {
+		char xml_data[filesize];
+		fread(xml_data, filesize, filesize, xml);
+		fclose(xml);
+		printf("%s", xml_data);
+		if ((GSDParser("<error>", xml_data)) == 0) {
+			if (mode == CREATE) {
+				window_message(MSG_34);
+			}
+			else {
+				window_message(MSG_35);
+			}
+		}
+	}
+	else {
+		window_message(MSG_27);
 	}
 }

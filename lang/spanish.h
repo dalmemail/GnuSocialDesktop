@@ -1,3 +1,5 @@
+#define MSG_0 "\t\t\tGnuSocial Desktop v0.5 \"Aranarth\"\n\tGSD es un sencillo cliente de la Red Social Libre\
+		\nGNUSocial escrito en C y GTK por <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com"
 #define MSG_1 "Postear"
 #define MSG_2 "Sobre GSD"
 #define MSG_3 "Protocolo: "
@@ -28,3 +30,8 @@
 #define MSG_28 "Eliminar Estado"
 #define MSG_29 "Estado Eliminado Correctamente"
 #define MSG_30 "Mi Línea Temporal"
+#define MSG_31 "Favoritos"
+#define MSG_32 "Marcar Como Favorito"
+#define MSG_33 "Desmarcar Favorito"
+#define MSG_34 "Favorito Creado Correctamente"
+#define MSG_35 "Favorito Eliminado Correctamente"
