@@ -11,7 +11,7 @@
 #define MSG_9 "Envoyer Message"
 #define MSG_10 "GnuSocial Desktop Message"
 #define MSG_11 "C'est Parti!"
-#define MSG_12 "Pour continuer il faut configurer un compte déjà créé dans une instance de GNUSocial.\nVotre mot de passe sera pas enregistré, étant considéré comme une donnée sensible.\n\t\t\t\t\tPour le protocole saisissez http ou https."
+#define MSG_12 "Pour continuer il faut configurer un compte déjà créé dans une instance de GNU Social.\nVotre mot de passe sera pas enregistré, étant considéré comme une donnée sensible.\n\t\t\t\t\tPour le protocole saisissez http ou https."
 #define MSG_13 "Le compte a été configuré correctement"
 #define MSG_14 "Erreur: Pas possible d'écrire sur le fichier gsd.config"
 #define MSG_15 "Supprimer Utilisateur"
