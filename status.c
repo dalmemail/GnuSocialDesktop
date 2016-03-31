@@ -396,12 +396,12 @@ void favorites(char *id, int mode)
 
 void write_user_info(char *xml_data)
 {
-	char reply[5][300];
-	char tofind[5][32] = {"<name>", "<screen_name>", "<location>", "<description>", "<profile_image_url>"};
+	char reply[10][300];
+	char tofind[10][32] = {"<name>", "<screen_name>", "<location>", "<description>", "<profile_image_url>", "<groups_count>", "<url>", "<followers_count>", "<friends_count>", "<statuses_count>"};
 	int pos = 0;
 	int act_pos = 0;
 	int start_pos = 0;
-	for (int x = 0; x < 5; x++) {
+	for (int x = 0; x < 10; x++) {
 		for (int y = 0; y < 300; y++) {
 			reply[x][y] = '\0';
 		}
@@ -425,7 +425,7 @@ void write_user_info(char *xml_data)
 	int fd;
 	creat("temp/user_data.txt", 0600);
 	if ((fd = open("temp/user_data.txt", O_WRONLY)) >= 0) {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 10; i++) {
 			write(fd, reply[i], strlen(reply[i]));
 			write(fd, "\n", 1);
 		}
