@@ -28,4 +28,6 @@ void delete_status_by_id(char *id);
 
 void favorite(char *id, int mode);
 
+void get_user_info(char data[4][32]);
+
 #endif 

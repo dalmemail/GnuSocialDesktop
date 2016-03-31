@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <curl/curl.h>
 #include <gtk/gtk.h>
+#include <fcntl.h>
 #include "lang/lang.h"
 #include "status.h"
 #include "gsd.h"
@@ -391,4 +392,84 @@ void favorites(char *id, int mode)
 	else {
 		window_message(MSG_27);
 	}
+}
+
+void write_user_info(char *xml_data)
+{
+	char reply[5][300];
+	char tofind[5][32] = {"<name>", "<screen_name>", "<location>", "<description>", "<profile_image_url>"};
+	int pos = 0;
+	int act_pos = 0;
+	int start_pos = 0;
+	for (int x = 0; x < 5; x++) {
+		for (int y = 0; y < 300; y++) {
+			reply[x][y] = '\0';
+		}
+		act_pos = 0;
+		for (int y = pos; act_pos != strlen(tofind[x]); y++) {
+			if (tofind[x][act_pos] == xml_data[y]) {
+				act_pos++;
+				if (act_pos == strlen(tofind[x])) {
+					pos = y;
+				}
+			}
+			else {
+				act_pos = 0;
+			}
+		}
+		start_pos = pos+1;
+		for (int y = 0; xml_data[start_pos+y] != '<' ||xml_data[start_pos+y+1] != '/'; y++) {
+			reply[x][y] = xml_data[start_pos+y];
+		}
+	}
+	int fd;
+	creat("temp/user_data.txt", 0600);
+	if ((fd = open("temp/user_data.txt", O_WRONLY)) >= 0) {
+		for (int i = 0; i < 4; i++) {
+			write(fd, reply[i], strlen(reply[i]));
+			write(fd, "\n", 1);
+		}
+		close(fd);
+		char command[strlen(reply[4])+24];
+		strcpy(command, "wget -O temp/avatar.png ");
+		strcat(command, reply[4]);
+		printf("%s\n", command);
+		system(command);
+	}
+	else {
+		window_message(MSG_36);
+	}
+}
+
+void get_user_info(char data[4][32])
+{
+	char *protocol = data[0];
+	char *user = data[1];
+	char *server = data[2];
+	char *password = data[3];
+	char url[100];
+	strcpy(url, protocol);
+	strcat(url, "://");
+	strcat(url, server);
+	strcat(url, "/api/users/show.xml");
+	FILE *xml = fopen("temp/file.xml", "wb");
+	CURL *curl = curl_easy_init();
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_USERPWD, user);
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
+        curl_easy_setopt(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, save_xml);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, xml);
+        curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+	fclose(xml);
+	xml = fopen("temp/file.xml", "r");
+	fseek(xml, 0L, SEEK_END);
+	int filesize = ftell(xml);
+	rewind(xml);
+	char xml_data[filesize];
+	fread(xml_data, filesize, filesize, xml);
+	fclose(xml);
+	printf("%s", xml_data);
+	write_user_info(xml_data);
 }

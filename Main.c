@@ -292,6 +292,7 @@ void create_account()
 	make_config();
 	gtk_widget_destroy(first_window);
 	gtk_main_quit();
+	get_user_info(data);
 	gnusocialdesktop();
 }
 

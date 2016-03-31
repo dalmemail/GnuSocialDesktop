@@ -35,3 +35,4 @@
 #define MSG_33 "Desmarcar Favorito"
 #define MSG_34 "Favorito Creado Correctamente"
 #define MSG_35 "Favorito Eliminado Correctamente"
+#define MSG_36 "Error: No se puede escribir el archivo \"temp/user_data.txt\"."

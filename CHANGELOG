@@ -36,6 +36,11 @@ v0.5 "Aranarth" (30-03-2016)
 [+] Capacidad para desmarcar como favorito un estado.
 [+] Soporte multi-idioma (Español, Inglés, Francés).
 
+v0.6 "Bilbo" (??-??-2016)
+-------------------------
+[+] Capacidad de obtener y almacenar la información de la
+cuenta del usuario, incluido el Avatar.
+
 -------------------------
 -------------------------
 [+] Añadido/Added
