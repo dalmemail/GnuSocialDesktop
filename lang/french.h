@@ -1,5 +1,5 @@
 #define MSG_0 "\t\t\tGnuSocial Desktop v0.5 \"Aranarth\"\n\tGSD est un client léger du réseau social libre\
-		\nGNUSocial écrit en C y GTK par <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com"
+		\nGNUSocial écrit en C et GTK par <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com"
 #define MSG_1 "Publier"
 #define MSG_2 "À propos de GSD"
 #define MSG_3 "Protocole: "
@@ -11,7 +11,7 @@
 #define MSG_9 "Envoyer Message"
 #define MSG_10 "GnuSocial Desktop Message"
 #define MSG_11 "C'est Parti!"
-#define MSG_12 "Pour continuer il faut configurer un compte déjà créé dans une instance de GnuSocial.\nVotre mot de passe sera pas enregistré, étant considéré comme une donnée sensible.\n\t\t\t\t\tPour le protocole saisissez http ou https."
+#define MSG_12 "Pour continuer il faut configurer un compte déjà créé dans une instance de GNUSocial.\nVotre mot de passe sera pas enregistré, étant considéré comme une donnée sensible.\n\t\t\t\t\tPour le protocole saisissez http ou https."
 #define MSG_13 "Le compte a été configuré correctement"
 #define MSG_14 "Erreur: Pas possible d'écrire sur le fichier gsd.config"
 #define MSG_15 "Supprimer Utilisateur"
