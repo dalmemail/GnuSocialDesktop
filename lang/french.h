@@ -1,4 +1,4 @@
-#define MSG_0 "\t\t\tGnuSocial Desktop v0.5 \"Aranarth\"\n\tGSD est un client léger du réseau social libre\
+#define MSG_0 "\t\t\tGnuSocial Desktop v0.6 \"Bilbo\"\n\tGSD est un client léger du réseau social libre\
 		\nGNUSocial écrit en C et GTK par <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com"
 #define MSG_1 "Publier"
 #define MSG_2 "À propos de GSD"
@@ -35,3 +35,14 @@
 #define MSG_33 "Supprimer de vos favoris"
 #define MSG_34 "Le statut s'est ajouté à vos favoris"
 #define MSG_35 "Le statut s'est supprimé de vos favoris"
+#define MSG_36 "Erreur: Pas possible d'écrire sur le fichier \"temp/user_data.txt\"."
+#define MSG_37 "Mon Compte"
+#define MSG_38 "Nom"
+#define MSG_39 "Alias"
+#define MSG_40 "Localisation"
+#define MSG_41 "Description"
+#define MSG_42 "URL"
+#define MSG_43 "Statuts"
+#define MSG_44 "Abonnés"
+#define MSG_45 "Abonnements"
+#define MSG_46 "Groupes"
