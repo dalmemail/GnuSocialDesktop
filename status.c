@@ -40,8 +40,8 @@ char user_data[4][32];
 
 void print_reply(char *buffer)
 {
-	char reply[number_of_replies][5][300];
-	char tofind[5][32] = {"<text>", "<created_at>", "<id>", "<name>", "<screen_name>"};
+	char reply[number_of_replies][6][300];
+	char tofind[6][32] = {"<text>", "<created_at>", "<id>", "<name>", "<screen_name>", "<favorited>"};
 	int pos = 0;
 	int act_pos = 0;
 	int start_pos = 0;
