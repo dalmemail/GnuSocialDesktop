@@ -334,7 +334,7 @@ void ask_me_id()
         gtk_main();
 }
 
-char user_info[10][100];
+char user_info[10][200];
 
 void my_account()
 {
@@ -367,16 +367,16 @@ void my_account()
 void gnusocialdesktop()
 {
 	int fd;
-	char raw_data[1000];
+	char raw_data[1500];
 	if ((fd = open("temp/user_data.txt", O_RDONLY)) >= 0) {
-		read(fd, raw_data, 1000);
+		read(fd, raw_data, 1500);
 		close(fd);
 		int y = 0;
 		for (int i = 0; i < 10; i++) {
-			for (int x = 0; x < 100; x++) {
+			for (int x = 0; x < 200; x++) {
 				user_info[i][x] = '\0';
 			}
-			for (int x = 0; raw_data[y] != '\n' && x < 100; x++) {
+			for (int x = 0; raw_data[y] != '\n' && x < 200; x++) {
 				user_info[i][x] = raw_data[y];
 				y++;
 			}
