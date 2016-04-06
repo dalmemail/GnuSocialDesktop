@@ -1,5 +1,5 @@
 #define MSG_0 "\t\t\tGnuSocial Desktop v0.6 \"Bilbo\"\n\tGSD is a lightweight client for the free social network\
-		\nGNUSocial. It's written in C and GTK by <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com"
+		\nGNU Social. It's written in C and GTK by <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com"
 #define MSG_1 "Share Status"
 #define MSG_2 "About GSD"
 #define MSG_3 "Protocol: "
@@ -11,7 +11,7 @@
 #define MSG_9 "Send"
 #define MSG_10 "GnuSocial Desktop Message"
 #define MSG_11 "I'm ready!"
-#define MSG_12 "To continue you have to configure an already created account on GnuSocial.\nYour password won't be saved. The protocol must be http or https."
+#define MSG_12 "To continue you have to configure an already created account on GNU Social.\nYour password won't be saved. The protocol must be http or https."
 #define MSG_13 "Your account has been configured correctly"
 #define MSG_14 "Error: gsd.config file couldn't be written"
 #define MSG_15 "Delete User"
