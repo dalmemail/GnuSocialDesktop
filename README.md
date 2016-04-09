@@ -4,6 +4,7 @@ GnuSocialDesktop is a client write in C and GTK for GNU/Linux-based Operating Sy
 * Dependencies
 	- libcurl-dev
 	- libgtk2.0-dev
+	- wget
 * Compile
 
 	- In English:
