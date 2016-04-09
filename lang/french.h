@@ -46,3 +46,4 @@
 #define MSG_44 "Abonnés"
 #define MSG_45 "Abonnements"
 #define MSG_46 "Groupes"
+#define MSG_47 "Actualiser l'affichage"
