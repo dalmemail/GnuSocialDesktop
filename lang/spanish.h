@@ -46,3 +46,4 @@
 #define MSG_44 "Siguiendo"
 #define MSG_45 "Seguidores"
 #define MSG_46 "Grupos"
+#define MSG_47 "Actualizar Información"

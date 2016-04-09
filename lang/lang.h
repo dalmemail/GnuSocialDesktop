@@ -1,4 +1,4 @@
-#define MSG_0 "\t\t\tGnuSocial Desktop v0.5 \"Aranarth\"\n\tGSD es un sencillo cliente de la Red Social Libre\
+#define MSG_0 "\t\t\tGnuSocial Desktop v0.6 \"Bilbo\"\n\tGSD es un sencillo cliente de la Red Social Libre\
 		\nGNUSocial escrito en C y GTK por <dalmemail@amaya.tk>\n\t\t\thttp://gsdesktop.amayaos.com"
 #define MSG_1 "Postear"
 #define MSG_2 "Sobre GSD"
@@ -36,3 +36,14 @@
 #define MSG_34 "Favorito Creado Correctamente"
 #define MSG_35 "Favorito Eliminado Correctamente"
 #define MSG_36 "Error: No se puede escribir el archivo \"temp/user_data.txt\"."
+#define MSG_37 "Mi Cuenta"
+#define MSG_38 "Nombre"
+#define MSG_39 "Alias"
+#define MSG_40 "Localización"
+#define MSG_41 "Descripción"
+#define MSG_42 "URL"
+#define MSG_43 "Estados"
+#define MSG_44 "Siguiendo"
+#define MSG_45 "Seguidores"
+#define MSG_46 "Grupos"
+#define MSG_47 "Actualizar Información"
