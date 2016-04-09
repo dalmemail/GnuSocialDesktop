@@ -46,3 +46,4 @@
 #define MSG_44 "Following"
 #define MSG_45 "Followers"
 #define MSG_46 "Groups"
+#define MSG_47 "Refresh Information"
