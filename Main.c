@@ -376,7 +376,7 @@ void gnusocialdesktop()
 			for (int x = 0; x < 200; x++) {
 				user_info[i][x] = '\0';
 			}
-			for (int x = 0; raw_data[y] != '\n' && x < 200; x++) {
+			for (int x = 0; raw_data[y] != ';' && x < 200; x++) {
 				user_info[i][x] = raw_data[y];
 				y++;
 			}

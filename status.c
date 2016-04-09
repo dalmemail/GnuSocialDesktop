@@ -427,7 +427,7 @@ void write_user_info(char *xml_data)
 	if ((fd = open("temp/user_data.txt", O_WRONLY)) >= 0) {
 		for (int i = 0; i < 10; i++) {
 			write(fd, reply[i], strlen(reply[i]));
-			write(fd, "\n", 1);
+			write(fd, ";", 1);
 		}
 		close(fd);
 		char command[strlen(reply[4])+24];
