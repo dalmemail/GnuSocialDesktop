@@ -334,16 +334,25 @@ void ask_me_id()
         gtk_main();
 }
 
+GtkWidget *w1;
+
+void update_user_info()
+{
+	get_user_info(data);
+	gtk_widget_destroy(w1);
+	gtk_main_quit();
+}
+
 char user_info[10][200];
 
 void my_account()
 {
         /* Creo la ventana */
-        GtkWidget *w = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+        w1 = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
         /* Le pongo un título */
-        gtk_window_set_title(GTK_WINDOW(w), MSG_37);
-    	gtk_signal_connect (GTK_OBJECT (w), "delete_event",
+        gtk_window_set_title(GTK_WINDOW(w1), MSG_37);
+    	gtk_signal_connect (GTK_OBJECT (w1), "delete_event",
         GTK_SIGNAL_FUNC (delete_event), NULL);
 	GtkWidget *box1 = gtk_table_new(3,2,FALSE);
 
@@ -357,10 +366,15 @@ void my_account()
 	GtkWidget *label1 = gtk_label_new(string);
 	gtk_table_attach_defaults(GTK_TABLE(box1),label1,0,1,1,2);
 
-	gtk_container_add(GTK_CONTAINER(w), box1);
+	GtkWidget *button1 = gtk_button_new_with_label (MSG_47);
+	gtk_signal_connect (GTK_OBJECT (button1), "clicked", GTK_SIGNAL_FUNC (update_user_info), (gpointer) NULL);
+	gtk_box_pack_start(GTK_BOX(box1), button1, TRUE, TRUE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(box1),button1,0,1,2,3);
+
+	gtk_container_add(GTK_CONTAINER(w1), box1);
 
 	gtk_widget_show(box1);
-        gtk_widget_show_all(w);
+        gtk_widget_show_all(w1);
         gtk_main();
 }
 
